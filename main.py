@@ -1,5 +1,5 @@
-import tkinter as Tk
-from tkinter import *
+from tkinter import Canvas
+from tkinter import Tk
 import random
 import time
 
