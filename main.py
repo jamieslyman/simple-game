@@ -55,6 +55,13 @@ class Paddle:
         self.x = -2
     def turn_right(self, evt):
         self.x = 2
+class OtherKeybinds:
+    def __init__(self):
+        self.canvas = canvas
+        self.canvas.bind_all('<KeyPress-R>', self.reset)
+    def reset(self):
+        Paddle(canvas, 'blue')
+        Ball(canvas, paddle, 'red')
 tk = Tk()
 tk.title("Game")
 tk.resizable(0, 0)
@@ -64,7 +71,8 @@ canvas.pack()
 tk.update()
 paddle = Paddle(canvas, 'blue')
 ball = Ball(canvas, paddle, 'red')
-while 1:
+otherkeybinds = OtherKeybinds()
+while True:
     if ball.hit_bottom == False:
         ball.draw()
         paddle.draw()
