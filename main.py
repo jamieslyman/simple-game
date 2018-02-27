@@ -60,6 +60,7 @@ class OtherKeybinds:
 		self.canvas = canvas
 		self.canvas.bind_all('r', self.reset)
 	def reset(self, evt):
+		ball.canvas.move(ball.id, 245, 100)
 		starts = [-3, -2,-1, 1, 2, 3]
 		random.shuffle(starts)
 		ball.x = starts[0]
