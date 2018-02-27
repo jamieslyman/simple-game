@@ -13,6 +13,8 @@ class Ball:
 		random.shuffle(starts)
 		self.x = starts[0]
 		self.y = -3
+		self.xmovecounter = 0
+		self.ymovecounter = 0
 		self.canvas_height = self.canvas.winfo_height()
 		self.canvas_width = self.canvas.winfo_width()
 		self.hit_bottom = False
@@ -35,12 +37,15 @@ class Ball:
 			self.x = 3
 		if pos[2] >= self.canvas_width:
 			self.x = -3
+		self.xmovecounter += self.x
+		self.ymovecounter += self.y
 class Paddle:
 	def __init__(self, canvas, color):
 		self.canvas = canvas
 		self.id = canvas.create_rectangle(0, 0, 100, 10, fill=color)
 		self.canvas.move(self.id, 200, 300 )
 		self.x = 0
+		self.xmovecounter = 0
 		self.canvas_width = self.canvas.winfo_width()
 		self.canvas.bind_all('<KeyPress-Left>', self.turn_left)
 		self.canvas.bind_all('<KeyPress-Right>', self.turn_right)
@@ -53,6 +58,7 @@ class Paddle:
 			self.x = 0
 		elif pos[2] >= self.canvas_width:
 			self.x = 0
+		self.xmovecounter += self.x
 	def turn_left(self, evt):
 		self.x = -2
 	def turn_right(self, evt):
@@ -67,16 +73,20 @@ class OtherKeybinds:
 		self.ballrelmovey = 0
 		self.paddlerelmovex = 0
 	def reset(self, evt):
-		self.ballrelmovex = ball.x - 245
-		self.ballrelmovey = ball.y - 100
-		self.paddlerelmovex = paddle.x - 200
-		ball.canvas.move(ball.id, self.ballrelmovex, self.ballrelmovey)
+		paddle.xmovecounter *= -1
+		paddle.canvas.move(paddle.id, paddle.xmovecounter, 0)
+		paddle.xmovecounter = 0
+		ball.xmovecounter *= -1
+		ball.ymovecounter *= -1
+		ball.canvas.move(ball.id, ball.xmovecounter, ball.ymovecounter)
 		starts = [-3, -2,-1, 1, 2, 3]
 		random.shuffle(starts)
 		ball.x = starts[0]
 		ball.y = -3
-		paddle.x = 0
-		paddle.canvas.move(paddle.id, self.paddlerelmovex, 0)
+		ball.canvas.move(ball.id, ball.x, ball.y)
+		ball.xmovecounter = starts[0]
+		ball.ymovecounter = -3
+
 tk = Tk()
 tk.title("Game")
 tk.resizable(0, 0)
