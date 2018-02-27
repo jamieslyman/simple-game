@@ -58,8 +58,8 @@ class Paddle:
 class OtherKeybinds:
     def __init__(self):
         self.canvas = canvas
-        self.canvas.bind_all('<KeyPress-R>', self.reset)
-    def reset(self):
+        self.canvas.bind_all('r', self.reset)
+    def reset(self, evt):
         starts = [-3, -2,-1, 1, 2, 3]
         random.shuffle(starts)
         ball.x = starts[0]
