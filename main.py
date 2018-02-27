@@ -59,14 +59,20 @@ class OtherKeybinds:
 	def __init__(self):
 		self.canvas = canvas
 		self.canvas.bind_all('r', self.reset)
+		self.ballrelmovex = 0
+		self.ballrelmovey = 0
+		self.paddlerelmovex = 0
 	def reset(self, evt):
-		ball.canvas.move(ball.id, 245, 100)
+		self.ballrelmovex = ball.x - 245
+		self.ballrelmovey = ball.y - 100
+		self.paddlerelmovex = paddle.x - 200
+		ball.canvas.move(ball.id, self.ballrelmovex, self.ballrelmovey)
 		starts = [-3, -2,-1, 1, 2, 3]
 		random.shuffle(starts)
 		ball.x = starts[0]
 		ball.y = -3
 		paddle.x = 0
-		paddle.canvas.move(paddle.id, 200, 300)
+		paddle.canvas.move(paddle.id, self.paddlerelmovex, 0)
 tk = Tk()
 tk.title("Game")
 tk.resizable(0, 0)
