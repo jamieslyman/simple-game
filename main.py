@@ -44,6 +44,8 @@ class Paddle:
 		self.canvas_width = self.canvas.winfo_width()
 		self.canvas.bind_all('<KeyPress-Left>', self.turn_left)
 		self.canvas.bind_all('<KeyPress-Right>', self.turn_right)
+		self.canvas.bind_all('<KeyRelease-Left>', self.stopmoving)
+		self.canvas.bind_all('<KeyRelease-Right>', self.stopmoving)
 	def draw(self):
 		self.canvas.move(self.id, self.x, 0)
 		pos = self.canvas.coords(self.id)
@@ -55,6 +57,8 @@ class Paddle:
 		self.x = -2
 	def turn_right(self, evt):
 		self.x = 2
+	def stopmoving(self, evt):
+		self.x = 0
 class OtherKeybinds:
 	def __init__(self):
 		self.canvas = canvas
