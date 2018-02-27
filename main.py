@@ -60,9 +60,9 @@ class Paddle:
 			self.x = 0
 		self.xmovecounter += self.x
 	def turn_left(self, evt):
-		self.x = -2
+		self.x = -4
 	def turn_right(self, evt):
-		self.x = 2
+		self.x = 4
 	def stopmoving(self, evt):
 		self.x = 0
 class OtherKeybinds:
