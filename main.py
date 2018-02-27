@@ -60,8 +60,12 @@ class OtherKeybinds:
         self.canvas = canvas
         self.canvas.bind_all('<KeyPress-R>', self.reset)
     def reset(self):
-        Paddle(canvas, 'blue')
-        Ball(canvas, paddle, 'red')
+        starts = [-3, -2,-1, 1, 2, 3]
+        random.shuffle(starts)
+        ball.x = starts[0]
+        ball.y = -3
+        paddle.x = 0
+        paddle.canvas.move(paddle.id, 200, 300)
 tk = Tk()
 tk.title("Game")
 tk.resizable(0, 0)
