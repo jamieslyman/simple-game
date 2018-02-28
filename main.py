@@ -1,5 +1,6 @@
 from tkinter import Canvas
 from tkinter import Tk
+from tkinter import messagebox
 import random
 import time
 
@@ -46,11 +47,16 @@ class Paddle:
 		self.canvas.move(self.id, 200, 300 )
 		self.x = 0
 		self.xmovecounter = 0
+		self.paddlemovespeed = 0
 		self.canvas_width = self.canvas.winfo_width()
 		self.canvas.bind_all('<KeyPress-Left>', self.turn_left)
 		self.canvas.bind_all('<KeyPress-Right>', self.turn_right)
 		self.canvas.bind_all('<KeyRelease-Left>', self.stopmoving)
 		self.canvas.bind_all('<KeyRelease-Right>', self.stopmoving)
+		if messagebox.askyesno("Difficulty", "Do you want Easy difficulty?"):
+			self.paddlemovespeed = 4
+		else:
+			self.paddlemovespeed = 2
 	def draw(self):
 		self.canvas.move(self.id, self.x, 0)
 		pos = self.canvas.coords(self.id)
@@ -60,9 +66,9 @@ class Paddle:
 			self.x = 0
 		self.xmovecounter += self.x
 	def turn_left(self, evt):
-		self.x = -4
+		self.x = -self.paddlemovespeed
 	def turn_right(self, evt):
-		self.x = 4
+		self.x = self.paddlemovespeed
 	def stopmoving(self, evt):
 		self.x = 0
 class OtherKeybinds:
