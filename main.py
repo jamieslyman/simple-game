@@ -1,8 +1,6 @@
-from tkinter import Canvas
-from tkinter import Tk
-from tkinter import messagebox
 import random
 import time
+from tkinter import Canvas, Tk, messagebox
 
 
 class Ball:
