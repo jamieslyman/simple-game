@@ -32,8 +32,8 @@ class Ball:
         if pos[1] <= 0:
             self.y = 3
         if pos[3] >= self.canvas_height:
-            self.hit_bottom - True
-        if self.hit_paddle(pos) == True:
+            self.hit_bottom = True
+        if self.hit_paddle(pos):
             self.y = -3
         if pos[0] <= 0:
             self.x = 3
@@ -102,6 +102,7 @@ class OtherKeybinds:
         ball.canvas.move(ball.id, ball.x, ball.y)
         ball.xmovecounter = starts[0]
         ball.ymovecounter = -3
+        ball.hit_bottom = False
 
 
 tk = Tk()
@@ -115,7 +116,7 @@ paddle = Paddle(canvas, 'blue')
 ball = Ball(canvas, paddle, 'red')
 otherkeybinds = OtherKeybinds()
 while True:
-    if ball.hit_bottom == False:
+    if not ball.hit_bottom:
         ball.draw()
         paddle.draw()
     tk.update_idletasks()
