@@ -22,7 +22,7 @@ class Ball:
     def hit_paddle(self, pos):
         paddle_pos = self.canvas.coords(self.paddle.id)
         if pos[2] >= paddle_pos[0] and pos[0] <= paddle_pos[2]:
-            if pos[3] >= paddle_pos[1] and pos[3] <= paddle_pos[3]:
+            if paddle_pos[1] <= pos[3] <= paddle_pos[3]:
                 return True
         return False
 
@@ -80,6 +80,7 @@ class Paddle:
         self.x = 0
 
 
+# noinspection PyUnusedLocal
 class OtherKeybinds:
     def __init__(self):
         self.canvas = canvas
@@ -88,7 +89,8 @@ class OtherKeybinds:
         self.ballrelmovey = 0
         self.paddlerelmovex = 0
 
-    def reset(self, evt):
+    @staticmethod
+    def reset(evt):
         paddle.xmovecounter *= -1
         paddle.canvas.move(paddle.id, paddle.xmovecounter, 0)
         paddle.xmovecounter = 0
